@@ -1,13 +1,16 @@
+<!-- If the user is logged in we want to show a differnt user page than if the user was not the owner of the profile -->
 <% if "user_id" == params[:id] %>
 	<h1>Hello <%= @user.first_name %></h1>
 
+<!-- List the user's items that are for sale -->
 	<h3>Your Items for sale!</h3>
 	<% @user.product.all.each do |product| %>
 		<%= link_to product.name, product %>
 		<br>
 	<% end %>
 
-	<h3>Your Reviews (not working yet)</h3>
+<!-- List the user's reviews and average rating -->
+	<h3>Your Reviews</h3>
 	Average Seller Rating: 
 	<%if @user.average_rating.nil? %>
 		No Seller Ratings
@@ -23,12 +26,15 @@
 		<br>
 	<% end %>
 
+<!-- List the user's items for sale -->
 	<h3><%= link_to "List an item for sale", new_product_path %></h3>
 
 	<%= link_to "Product Page", root_path %>
 
-
+<!-- If the user is not logged into the profile that they are viewing we do this -->
 <% else %>
+
+<!-- find the user, display their name and some stats-->
 	<% user = User.find(params[:id]) %>
 	<h1><%= user.first_name %> <%= user.last_name %></h1>
 	<h3>Number of Products Sold: <%= user.products_sold %></h3>
@@ -41,8 +47,10 @@
 		<%=@user.average_rating%> <br>
 	<%end%>
 
+<!-- Allow other user's to review this person -->
 	<h3><%= link_to "Review Seller", new_review_path %></h3>
 
+<!-- Display the user's reviews -->
 	<br>
 	<% user.reviews.all.each do |review| %>
 		<% reviewer = User.find(review.reviewer_id) %>
@@ -51,6 +59,7 @@
 		<br>
 	<% end %>
 
+<!-- Display the items that the user has for sale -->
 	<h2> Products for Sale </h2>
 	<% user.product.all.each do |product| %>
 		<h3><%= link_to product.name, product %></h3>

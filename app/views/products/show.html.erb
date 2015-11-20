@@ -1,11 +1,20 @@
+<!-- Display product stats and information -->
 <%= @product.name %>
 <p>
-Seller: <%=@product.buyer_id%>
+
+<!-- Determine the product's seller -->
+<% seller = User.find(@product.user_id) %>
+		Seller: <%= seller.first_name %> <%= seller.last_name%> <br>
 </p>
+
+<!-- Carry on with the stats -->
 <p>
 Category: <%=@product.category%>
 </p>
 Description: <%=@product.description%>
+<p>
+</p>
+Auction End Date: <%=@product.end_date%>
 <p>
 Starting Price: <%=number_to_currency(@product.starting_price, :unit => "$")%>
 </p>
@@ -15,6 +24,7 @@ Current Price: <%=number_to_currency(@product.current_price, :unit => "$")%>
 Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
 </p>
 
+<!-- Bid and Buy now options for those that are logged in -->
 <p>
 <% if session[:user_id] %>
 	<%= link_to "Buy It Now" %>
@@ -32,4 +42,5 @@ Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
 <% end %>
 </p>
 
+<!-- Link to return to the product list -->
 <%= link_to "Product List", root_path %>

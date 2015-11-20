@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to @product
     else
-      redner 'new'
+      render 'new'
     end
   end
 
