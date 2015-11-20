@@ -1,0 +1,16 @@
+
+<% @product.each_with_index do |product, i| %>
+	<% break if i == 6 %>
+	<section>
+		<h3><%= link_to product.name, product %></h3>
+		<p>
+			<%= product.category %>
+		</p>
+		<p>
+			<%= product.description %>
+		</p>
+		<p>
+			<%= "--------------------------------------------" %>
+		</p>
+	</section>
+<% end %>

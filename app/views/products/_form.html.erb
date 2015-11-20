@@ -1,0 +1,42 @@
+<% if @product.errors.any? %>
+	<h2>There were errors saving your product</h2>
+	<ul>
+		<% @product.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= form_for @product do |f| %>
+	<fieldset>
+		<div>
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div>
+			<%= f.label :category %>
+			<%= f.text_field :category %>
+		</div>
+		<div>
+			<%= f.label :description %>
+			<%= f.text_field :description %>
+		</div>
+		<div>
+			<%= f.label :starting_price %>
+			<%= f.text_field :starting_price %>
+		</div>
+		<div>
+			<%= f.label :buy_now_price %>
+			<%= f.text_field :buy_now_price %>
+		</div>
+		<div>
+			<%= f.label "Minimum Price" %>
+			<%= f.text_field :min_price %>
+		</div>
+		<div>
+			<%= f.label "Auction End Date" %>
+			<%= f.text_field :buy_now_price %>
+		</div>
+	</fieldset>
+	<%= f.submit %>
+<% end %>

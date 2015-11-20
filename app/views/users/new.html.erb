@@ -1,0 +1,44 @@
+<div class='container'>
+	<div class='col-8 push-2'>
+		<h2>Signup</h2>
+		<%= form_for @user do |f| %>
+			<label>
+				First Name
+				<br />
+				<%= f.text_field :first_name %>
+			</label>
+			<br />
+			<label>
+				Last Name
+				<br />
+				<%= f.text_field :last_name %>
+			</label>
+			<br />
+			<label>
+				Email Address
+				<br />
+				<%= f.text_field :email %>
+			</label>
+			<br />
+			<label>
+				Password
+				<br />
+				<%= f.password_field :password %>
+			</label>
+			<br />
+			<label>
+				Confirm Password
+				<br />
+				<%= f.password_field :password_confirmation %>
+			</label>
+			<br />			
+			<label>
+				Initial Deposit
+				<br />
+				<%= f.text_field :cash %>
+			</label>
+			<br />
+			<%= f.submit %>
+		<% end %>
+	</div>
+</div>

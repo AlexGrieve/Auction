@@ -1,0 +1,8 @@
+<% @user.each_with_index do |user, i| %>
+	<% break if i == 4 %>
+	<section>
+		<h3><%= link_to user.first_name, user %></h3>
+			<%= "--------------------------------------------" %>
+		</p>
+	</section>
+<% end %>

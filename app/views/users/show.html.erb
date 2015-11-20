@@ -1,0 +1,59 @@
+<% if "user_id" == params[:id] %>
+	<h1>Hello <%= @user.first_name %></h1>
+
+	<h3>Your Items for sale!</h3>
+	<% @user.product.all.each do |product| %>
+		<%= link_to product.name, product %>
+		<br>
+	<% end %>
+
+	<h3>Your Reviews (not working yet)</h3>
+	Average Seller Rating: 
+	<%if @user.average_rating.nil? %>
+		No Seller Ratings
+	<%else%>
+		<%=@user.average_rating%> <br>
+	<%end%>
+
+	<br>
+	<% @user.reviews.all.each do |review| %>
+		<% reviewer = User.find(review.reviewer_id) %>
+		Reviewer: <%= reviewer.first_name %> <%= reviewer.last_name %> <br>
+		"<%= review.review %>"
+		<br>
+	<% end %>
+
+	<h3><%= link_to "List an item for sale", new_product_path %></h3>
+
+	<%= link_to "Product Page", root_path %>
+
+
+<% else %>
+	<% user = User.find(params[:id]) %>
+	<h1><%= user.first_name %> <%= user.last_name %></h1>
+	<h3>Number of Products Sold: <%= user.products_sold %></h3>
+	<h3>Number of Products bought: <%= user.products_bought %></h3>
+
+	Average Seller Rating:
+	<%if user.average_rating.nil? %>
+		No Seller Ratings
+	<%else%>
+		<%=@user.average_rating%> <br>
+	<%end%>
+
+	<h3><%= link_to "Review Seller", new_review_path %></h3>
+
+	<br>
+	<% user.reviews.all.each do |review| %>
+		<% reviewer = User.find(review.reviewer_id) %>
+		Reviewer: <%= reviewer.first_name %> <%= reviewer.last_name %> <br>
+		"<%= review.review %>"
+		<br>
+	<% end %>
+
+	<h2> Products for Sale </h2>
+	<% user.product.all.each do |product| %>
+		<h3><%= link_to product.name, product %></h3>
+	<% end %>
+<% end %>
+

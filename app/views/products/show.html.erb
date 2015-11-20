@@ -1,0 +1,35 @@
+<%= @product.name %>
+<p>
+Seller: <%=@product.buyer_id%>
+</p>
+<p>
+Category: <%=@product.category%>
+</p>
+Description: <%=@product.description%>
+<p>
+Starting Price: <%=number_to_currency(@product.starting_price, :unit => "$")%>
+</p>
+Current Price: <%=number_to_currency(@product.current_price, :unit => "$")%>
+
+<p>
+Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
+</p>
+
+<p>
+<% if session[:user_id] %>
+	<%= link_to "Buy It Now" %>
+	</p>
+	<%= form_for @product do |p| %>
+		<label>
+			Bid
+			<br />
+				<%= p.text_field :current_price %>
+		</label>
+	<%= p.submit "Bid" %>
+	<% end %>
+<% else %>
+	You must be logged in to buy it now!
+<% end %>
+</p>
+
+<%= link_to "Product List", root_path %>
