@@ -1,5 +1,44 @@
+<style>
+#header {
+    background-color:#77B6EA;
+    color:#172A3A;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#D6E4F3;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;	      
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px;	 	 
+}
+#footer {
+    background-color:#77B6EA;
+    color:#172A3A;
+    clear:both;
+    text-align:left;
+   padding:5px;	 	 
+}
+</style>
+
+
+<div id="header">
+<h1>Auction</h1>
+</div>
+
+<% if @product.product_is_sold %>
+	<h1>This item has been sold!</h1>
+	<%= @product.name %> was sold for <%= @product.current_price %>
+<% end %>
+
 <!-- Display product stats and information -->
-<%= @product.name %>
+<h1 style="text-align:center"><%= @product.name %></h1>
 <p>
 
 <!-- Determine the product's seller -->
@@ -19,16 +58,13 @@ Auction End Date: <%=@product.end_date%>
 Starting Price: <%=number_to_currency(@product.starting_price, :unit => "$")%>
 </p>
 Current Price: <%=number_to_currency(@product.current_price, :unit => "$")%>
-
 <p>
-Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
+Bids: <%= @product.bids %>
 </p>
 
-<!-- Bid and Buy now options for those that are logged in -->
+<!-- Extract the form away -->
 <p>
 <% if session[:user_id] %>
-	<%= link_to "Buy It Now" %>
-	</p>
 	<%= form_for @product do |p| %>
 		<label>
 			Bid
@@ -37,10 +73,29 @@ Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
 		</label>
 	<%= p.submit "Bid" %>
 	<% end %>
-<% else %>
-	You must be logged in to buy it now!
+
+<!-- User must be logged in to big -->
+<% else%>
+	You must be logged in to bid!
 <% end %>
 </p>
 
+<!-- Do not show Buy Now option if a bid has been placed -->
+<% if @product.bids == 0 %>
+	<p>
+	Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
+	</p>
+	<% if session[:user_id] %>
+		<%= link_to "Buy It Now", products_buy_now_path %>
+	<% end %>
+<% end %>
+
+
+
 <!-- Link to return to the product list -->
-<%= link_to "Product List", root_path %>
+<div id="footer">
+<%= link_to "Home", root_path %>
+</div>
+
+
+

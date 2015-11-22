@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/products/buy_now' => 'products#buy_now'
   resources :users
   resources :products
   resources :reviews

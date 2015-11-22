@@ -28,12 +28,12 @@ class ProductsController < ApplicationController
     end
   end
 
-  # How to update the price?
-  # Set_current_price in prodct.rb getting in the way?
   def update
       @product = Product.find(params[:id])
+      # Not ideal
+      @product.bids += 1
       if @product.update safe_product_params
-        redirect_to @product
+          redirect_to @product
       else
         redirect_to root_path
     end

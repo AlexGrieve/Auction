@@ -1,8 +1,26 @@
-<h1>Welcome to AuctionHouse!</h1>
+<style>
+#header {
+    background-color:#77B6EA;
+    color:#172A3A;
+    text-align:center;
+    padding:5px;
+}
+#footer {
+    background-color:#77B6EA;
+    color:#172A3A;
+    clear:both;
+    text-align:left;
+    padding:5px;	 	 
+}
+</style>
+
+
+<div id="header">
+<h1>Auction</h1>
+</div>
 
 <% if session[:user_id] %>
-	<h2> Welcome Back! </h2>
-	<h3><%= link_to "User Profile", user_path(:user_id) %></h3>
+	<h2><%= link_to "Welcome Back!", user_path(:user_id) %> </h2>
 <% else %>
 	<h3><%= link_to "Sign Up", new_user_path %></h3>
 	<h3><%= link_to "Log In", login_path %></h3>
@@ -21,7 +39,9 @@
 <%= render "userlist" %>
 
 
+<div id="footer">
 <% if session[:user_id] %>
-	<%= form_tag logout_path, method: 'post' %>
-	<%= submit_tag "Log Out" %>
+	<h3 style="text-align:left"> <%= link_to "Not You? Log out!", logout_path, method: 'post' %> </h3>
 <% end %>
+</div>
+

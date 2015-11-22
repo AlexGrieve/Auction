@@ -35,8 +35,21 @@
 		</div>
 		<div>
 			<%= f.label "Auction End Date" %>
-			<%= f.text_field :buy_now_price %>
+			<%= f.text_field :end_date %>
 		</div>
 	</fieldset>
 	<%= f.submit %>
 <% end %>
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <input type='text' class="form-control" id='datetimepicker4' />
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker4').datetimepicker();
+            });
+        </script>
+    </div>
+</div>

@@ -18,6 +18,7 @@
 		<%=@user.average_rating%> <br>
 	<%end%>
 
+<!-- Consider using blockquotes for reviews -->
 	<br>
 	<% @user.reviews.all.each do |review| %>
 		<% reviewer = User.find(review.reviewer_id) %>

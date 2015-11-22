@@ -1,7 +1,6 @@
 class Product < ActiveRecord::Base
 	# Set the current price before initial product create
-	before_save :set_current_price
-	before_save :set_unsold
+	before_save :set_pricing
 
 	belongs_to :seller, :class_name => 'User', :foreign_key => 'user_id'
 	belongs_to :buyer, :class_name => 'User', :foreign_key => 'buyer_id'
@@ -12,12 +11,10 @@ class Product < ActiveRecord::Base
 		belongs_to :user
 	end
 
-	# Set the current price implicitly from the starting price
-	def set_current_price
+	# Set the pricing features of product implicitly
+	def set_pricing
 		self.current_price = self.starting_price if self.current_price.nil?
-	end
-
-	def set_unsold
 		self.product_is_sold = false if self.product_is_sold.nil?
+		self.bids = 0 if self.bids.nil?
 	end
 end
