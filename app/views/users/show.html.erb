@@ -18,7 +18,6 @@
 		<%=@user.average_rating%> <br>
 	<%end%>
 
-<!-- Consider using blockquotes for reviews -->
 	<br>
 	<% @user.reviews.all.each do |review| %>
 		<% reviewer = User.find(review.reviewer_id) %>
@@ -49,7 +48,8 @@
 	<%end%>
 
 <!-- Allow other user's to review this person -->
-	<h3><%= link_to "Review Seller", new_review_path %></h3>
+	<h3><%= link_to "Review Seller", new_review_path(:id => user.id) %></h3>
+
 
 <!-- Display the user's reviews -->
 	<br>

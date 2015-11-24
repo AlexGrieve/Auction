@@ -1,0 +1,20 @@
+<% if session[:user_id] and (Time.now < @product.end_date) and !@product.product_is_sold %>
+	<%= form_for @product do |p| %>
+		<label>
+			Bid
+			<br />
+				<%= p.text_field :current_price %>
+		</label>
+	<%= p.submit "Bid" %>
+	<% end %>
+
+	<!-- Do not show Buy Now option if a bid has been placed -->
+	<% if @product.bids == 0 %>
+		<p>
+		<%= link_to "Buy it Now Price: ", buy_now_path(:id => @product.id) %> <%= number_to_currency(@product.buy_now_price, :unit => "$") %>
+		</p>
+	<% end %>
+
+<% elsif !session[:user_id] %>
+	You must be log in to bid!
+<% end %>

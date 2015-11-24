@@ -28,11 +28,6 @@
 
 <h2>Search our Products Below!<h2>
 
-<%= form_tag @products, method: "GET" do %>
-	<%= text_field_tag :q, params[:q] %>
-	<%= submit_tag "Search" %>
-<% end %>
-
 <br/>
 
 <%= render "productlist" %>

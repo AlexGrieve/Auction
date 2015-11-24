@@ -32,65 +32,19 @@
 <h1>Auction</h1>
 </div>
 
-<% if @product.product_is_sold %>
-	<h1>This item has been sold!</h1>
-	<%= @product.name %> was sold for <%= @product.current_price %>
-<% end %>
-
-<!-- Display product stats and information -->
 <h1 style="text-align:center"><%= @product.name %></h1>
-<p>
 
+<%= render "sold" %>
+
+<p>
 <!-- Determine the product's seller -->
 <% seller = User.find(@product.user_id) %>
 		Seller: <%= seller.first_name %> <%= seller.last_name%> <br>
 </p>
 
-<!-- Carry on with the stats -->
-<p>
-Category: <%=@product.category%>
-</p>
-Description: <%=@product.description%>
-<p>
-</p>
-Auction End Date: <%=@product.end_date%>
-<p>
-Starting Price: <%=number_to_currency(@product.starting_price, :unit => "$")%>
-</p>
-Current Price: <%=number_to_currency(@product.current_price, :unit => "$")%>
-<p>
-Bids: <%= @product.bids %>
-</p>
+<%= render "stats" %>
 
-<!-- Extract the form away -->
-<p>
-<% if session[:user_id] %>
-	<%= form_for @product do |p| %>
-		<label>
-			Bid
-			<br />
-				<%= p.text_field :current_price %>
-		</label>
-	<%= p.submit "Bid" %>
-	<% end %>
-
-<!-- User must be logged in to big -->
-<% else%>
-	You must be logged in to bid!
-<% end %>
-</p>
-
-<!-- Do not show Buy Now option if a bid has been placed -->
-<% if @product.bids == 0 %>
-	<p>
-	Buy it Now Price: <%=number_to_currency(@product.buy_now_price, :unit => "$")%>
-	</p>
-	<% if session[:user_id] %>
-		<%= link_to "Buy It Now", products_buy_now_path %>
-	<% end %>
-<% end %>
-
-
+<%= render "bid" %>
 
 <!-- Link to return to the product list -->
 <div id="footer">

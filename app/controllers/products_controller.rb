@@ -30,14 +30,33 @@ class ProductsController < ApplicationController
 
   def update
       @product = Product.find(params[:id])
+
       # Not ideal
       @product.bids += 1
+
       if @product.update safe_product_params
           redirect_to @product
       else
         redirect_to root_path
     end
   end
+
+  def buy_now
+    @product = Product.find(params[:id])
+
+    @product.buyer_id = @current_user.id
+    @product.product_is_sold = true
+    @product.current_price = @product.buy_now_price
+
+    puts "Here"
+
+    if @product.save
+      redirect_to @product
+    else
+      redirect_to(user_path)
+      puts "Failed"
+    end
+  end 
 
   def delete
   end

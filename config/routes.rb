@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get '/products/buy_now' => 'products#buy_now'
   resources :users
   resources :products
   resources :reviews
@@ -9,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'login', to: 'users#login'
   post 'login', to: 'users#authenticate'
+
+  get 'buy_now', to: 'products#buy_now'
 
   post 'authenticate', to: 'users#authenticate'
 

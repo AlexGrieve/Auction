@@ -8,7 +8,6 @@ class Product < ActiveRecord::Base
 	# Method for allowing users to search for products
 	def self.search_for(query)
 		where('name LIKE :query OR category LIKE :query', query: "%#{query}")
-		belongs_to :user
 	end
 
 	# Set the pricing features of product implicitly

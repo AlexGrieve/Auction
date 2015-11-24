@@ -1,0 +1,12 @@
+<div class='container'>
+	<div class='col-8 push-2'>
+		<%= form_for @review do |f| %>
+			<label>
+				<br />
+				<%= f.text_area :review, :cols => "40", :rows => "10" %>
+			</label>
+		<br />
+		<%= f.submit %>
+		<% end %>
+	</div>
+</div>	

@@ -9,8 +9,7 @@
 } 
 </style>
 
-<% @product.each_with_index do |product, i| %>
-	<% break if i == 9 %>
+<% @product.each do |product| %>
 	<div class="product">
 		<h3 style="text-align:center"><%= link_to product.name, product %></h1>
 		<p>
