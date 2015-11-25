@@ -1,3 +1,7 @@
+<div id="header">
+<h1>Auction</h1>
+</div>
+
 <h1>Login</h1>
 <%= form_tag '/authenticate' do %>
 	<input type="text" name="email" placeholder="Email Address" />
@@ -6,3 +10,8 @@
 	<br />
 	<button type="submit">Log in</button>
 <%end%>
+
+<!-- Link to return to the product list -->
+<div id="footer">
+<%= link_to "Home", root_path %>
+</div>

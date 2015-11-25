@@ -1,3 +1,7 @@
+<div id="header">
+<h1>Auction</h1>
+</div>
+
 <!-- If the user is logged in we want to show a differnt user page than if the user was not the owner of the profile -->
 <% if "user_id" == params[:id] %>
 	<h1>Hello <%= @user.first_name %></h1>
@@ -5,6 +9,7 @@
 <!-- List the user's items that are for sale -->
 	<h3>Your Items for sale!</h3>
 	<% @user.product.all.each do |product| %>
+		<% if !product.
 		<%= link_to product.name, product %>
 		<br>
 	<% end %>
@@ -67,3 +72,7 @@
 	<% end %>
 <% end %>
 
+<!-- Link to return to the product list -->
+<div id="footer">
+<%= link_to "Home", root_path %>
+</div>

@@ -1,3 +1,30 @@
 // Place all the styles related to the reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#header {
+    background-color:#77B6EA;
+    color:#172A3A;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#D6E4F3;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;	      
+}
+#section {
+    width:350px;
+    float:left;
+    padding:10px;	 	 
+}
+#footer {
+    background-color:#77B6EA;
+    color:#172A3A;
+    clear:both;
+    text-align:left;
+   padding:5px;	 	 
+}

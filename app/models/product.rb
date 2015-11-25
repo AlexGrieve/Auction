@@ -1,4 +1,4 @@
-class Product < ActiveRecord::Base
+ class Product < ActiveRecord::Base
 	# Set the current price before initial product create
 	before_save :set_pricing
 
@@ -15,5 +15,6 @@ class Product < ActiveRecord::Base
 		self.current_price = self.starting_price if self.current_price.nil?
 		self.product_is_sold = false if self.product_is_sold.nil?
 		self.bids = 0 if self.bids.nil?
+		self.auction_is_over = false if self.auction_is_over.nil?
 	end
 end

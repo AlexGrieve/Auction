@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'login', to: 'users#authenticate'
 
   get 'buy_now', to: 'products#buy_now'
+  post 'has_auction_ended', to: 'products#has_auction_ended'
 
   post 'authenticate', to: 'users#authenticate'
 

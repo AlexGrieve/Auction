@@ -4,7 +4,7 @@
 	<%= @product.name %> was sold for <%= @product.current_price %>
 
 <!-- Check to see if the auction ended without the product being sold -->
-<% elsif @product.end_date < Time.now and !@product_is_sold %>
+<% elsif @product.auction_is_over %>
 	<h2>This auction has ended!</h2>
 	<%= @product.name %> was not sold!
 <% end %>

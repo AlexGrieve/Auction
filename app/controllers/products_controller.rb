@@ -47,6 +47,7 @@ class ProductsController < ApplicationController
     @product.buyer_id = @current_user.id
     @product.product_is_sold = true
     @product.current_price = @product.buy_now_price
+    @product.auction_is_over = true
 
     puts "Here"
 
@@ -60,8 +61,6 @@ class ProductsController < ApplicationController
 
   def delete
   end
-
-
 
   private
   def safe_product_params
