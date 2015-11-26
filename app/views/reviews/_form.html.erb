@@ -6,6 +6,7 @@
 				<%= f.text_area :review, :cols => "40", :rows => "10" %>
 			</label>
 		<br />
+		<input type="hidden" name="reviewed_user_id" value="<%= @id %>" />
 		<%= f.submit %>
 		<% end %>
 	</div>

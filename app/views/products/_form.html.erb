@@ -18,8 +18,12 @@
 			<%= f.text_field :category %>
 		</div>
 		<div>
-			<%= f.label :description %>
+			<%= f.label "Short Description" %>
 			<%= f.text_field :description %>
+		</div>
+		<div>
+			<%= f.label "Detailed Description" %>
+			<%= f.text_area :long_description, :cols => "20", :rows => "10" %>
 		</div>
 		<div>
 			<%= f.label :starting_price %>

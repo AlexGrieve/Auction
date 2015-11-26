@@ -11,8 +11,8 @@ class ReviewsController < ApplicationController
 
     @review.reviewer_id = @current_user.id
 
-    # Why isnt this working?
-    @review.reviewed_user_id = @id
+    #  Requires a hidden field in the submit form
+    @review.reviewed_user_id = params[:reviewed_user_id].to_i
 
     if @review.save
       redirect_to products_path

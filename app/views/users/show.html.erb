@@ -9,8 +9,16 @@
 <!-- List the user's items that are for sale -->
 	<h3>Your Items for sale!</h3>
 	<% @user.product.all.each do |product| %>
-		<% if !product.
 		<%= link_to product.name, product %>
+		<br>
+	<% end %>
+
+<!-- List the items that a user is bidding on -->
+	<h3>Your You are bidding on!</h3>
+	<% Product.all.each do |product| %>
+		<% if product.buyer_id == @user.id %>
+			<%= link_to product.name, product %>
+		<% end %>
 		<br>
 	<% end %>
 
@@ -31,7 +39,7 @@
 		<br>
 	<% end %>
 
-<!-- List the user's items for sale -->
+<!-- Allow the user to sell items -->
 	<h3><%= link_to "List an item for sale", new_product_path %></h3>
 
 	<%= link_to "Product Page", root_path %>

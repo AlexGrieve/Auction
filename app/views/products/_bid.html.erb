@@ -1,11 +1,17 @@
 <% if session[:user_id] and (Time.now < @product.end_date) and !@product.product_is_sold %>
-	<%= form_for @product do |p| %>
+
+	<!-- form tag not a form for -->
+	<%= form_tag bid_path(@product), :method => :get, :class => ProductsController do %>
 		<label>
 			Bid
 			<br />
-				<%= p.text_field :current_price %>
+			<%= text_field_tag :current_price %>
+			<input type="hidden" name="buyer_id" value="<%= @product.id %>" />
 		</label>
-	<%= p.submit "Bid" %>
+	<%= submit_tag "Bid" %> 
+	<% if flash[:notice] %>
+    	<div class="notice"><%= flash[:notice] %></div>
+ 	 <% end %>
 	<% end %>
 
 	<!-- Do not show Buy Now option if a bid has been placed -->
@@ -13,6 +19,11 @@
 		<p>
 		<%= link_to "Buy it Now Price: ", buy_now_path(:id => @product.id) %> <%= number_to_currency(@product.buy_now_price, :unit => "$") %>
 		</p>
+	<% else %>
+	<!-- Determine the product's high bidder, if there is one -->
+		<br />
+		<% high_bidder = User.find(@product.buyer_id) %>
+		High Bidder: <%= high_bidder.first_name %> <br>
 	<% end %>
 
 <% elsif !session[:user_id] %>

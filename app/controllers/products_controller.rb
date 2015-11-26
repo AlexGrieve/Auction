@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @id = params[:id]
   end
 
   def create
@@ -31,13 +32,30 @@ class ProductsController < ApplicationController
   def update
       @product = Product.find(params[:id])
 
-      # Not ideal
-      @product.bids += 1
-
       if @product.update safe_product_params
-          redirect_to @product
+        redirect_to @product
       else
         redirect_to root_path
+    end
+  end
+
+  def bid
+    @product = Product.find(params[:buyer_id])
+
+    # Do not allow bids less than current price
+    if params[:current_price].to_d > @product.current_price
+      @product.buyer_id = @current_user.id
+      @product.bids += 1
+      @product.current_price = params[:current_price]
+
+      if @product.save
+        redirect_to @product
+      else
+        redirect_to(user_path)
+      end
+    else
+      flash[:notice] = "Bid must be higher than current bid!"
+      redirect_to @product
     end
   end
 
@@ -49,13 +67,10 @@ class ProductsController < ApplicationController
     @product.current_price = @product.buy_now_price
     @product.auction_is_over = true
 
-    puts "Here"
-
     if @product.save
       redirect_to @product
     else
       redirect_to(user_path)
-      puts "Failed"
     end
   end 
 
@@ -64,7 +79,7 @@ class ProductsController < ApplicationController
 
   private
   def safe_product_params
-    params.require('product').permit(:name, :category, :description, :starting_price, :buy_now_price, :current_price, :min_price, :end_date)
+    params.require('product').permit(:name, :category, :description, :long_description, :starting_price, :buy_now_price, :current_price, :min_price, :end_date, :buyer_id)
   end
 
   def load_product

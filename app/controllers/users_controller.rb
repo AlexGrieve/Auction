@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if @user.save
       # Create a session and redirect to the user's page
       session[:user_id] = @user.id
-      redirect_to user_path(@user)  
+      redirect_to user_path(:user_id)  
     else
       # Sign up failed
       redirect_to signup_path  
