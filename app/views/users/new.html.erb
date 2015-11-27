@@ -1,3 +1,4 @@
+<!-- Extract this to form? -->
 <div id="header">
 <h1>Auction</h1>
 </div>
@@ -41,6 +42,11 @@
 				<br />
 				<%= f.text_field :cash %>
 			</label>
+			<div>
+    			<%= image_tag(@user.avatar_url) if @user.avatar? %>
+    			<%= f.file_field :avatar %>
+    			<%= f.hidden_field :avatar_cache %>
+    		</div>
 			<br />
 			<%= f.submit %>
 		<% end %>

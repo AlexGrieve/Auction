@@ -5,6 +5,8 @@
 	belongs_to :seller, :class_name => 'User', :foreign_key => 'user_id'
 	belongs_to :buyer, :class_name => 'User', :foreign_key => 'buyer_id'
 
+ 	mount_uploader :avatar, AvatarUploader
+	
 	# Method for allowing users to search for products
 	def self.search_for(query)
 		where('name LIKE :query OR category LIKE :query', query: "%#{query}")

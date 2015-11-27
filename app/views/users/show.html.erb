@@ -19,7 +19,6 @@
 		<% if product.buyer_id == @user.id %>
 			<%= link_to product.name, product %>
 		<% end %>
-		<br>
 	<% end %>
 
 <!-- List the user's reviews and average rating -->
@@ -41,8 +40,6 @@
 
 <!-- Allow the user to sell items -->
 	<h3><%= link_to "List an item for sale", new_product_path %></h3>
-
-	<%= link_to "Product Page", root_path %>
 
 <!-- If the user is not logged into the profile that they are viewing we do this -->
 <% else %>
@@ -79,6 +76,9 @@
 		<h3><%= link_to product.name, product %></h3>
 	<% end %>
 <% end %>
+
+<%= image_tag @user.avatar if @user.avatar.present? %>
+
 
 <!-- Link to return to the product list -->
 <div id="footer">

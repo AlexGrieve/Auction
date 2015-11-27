@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
 	has_secure_password
 
+	mount_uploader :avatar, AvatarUploader
+
 	# Validates the user's password create
 	validates :password, length: {minimum: 5}, presence: {on: :create}
 	validates_confirmation_of :password

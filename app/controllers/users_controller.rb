@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   private
     # Method for safely accepting user input for creating a user
     def user_params
-      params.require('user').permit(:first_name, :last_name, :email, :password, :password_confirmation, :cash)
+      params.require('user').permit(:first_name, :last_name, :email, :password, :password_confirmation, :cash, :avatar)
     end
 
 end

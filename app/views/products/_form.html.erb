@@ -1,12 +1,3 @@
-<% if @product.errors.any? %>
-	<h2>There were errors saving your product</h2>
-	<ul>
-		<% @product.errors.full_messages.each do |msg| %>
-			<li><%= msg %></li>
-		<% end %>
-	</ul>
-<% end %>
-
 <%= form_for @product do |f| %>
 	<fieldset>
 		<div>
@@ -41,6 +32,12 @@
 			<%= f.label "Auction End Date" %>
 			<%= f.text_field :end_date %>
 		</div>
+		<div>
+    		<%= image_tag(@product.avatar_url) if @product.avatar? %>
+    		<%= f.file_field :avatar %>
+    		<%= f.hidden_field :avatar_cache %>
+    	</div>
+  		</p>
 	</fieldset>
 	<%= f.submit %>
 <% end %>

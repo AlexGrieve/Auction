@@ -79,7 +79,7 @@ class ProductsController < ApplicationController
 
   private
   def safe_product_params
-    params.require('product').permit(:name, :category, :description, :long_description, :starting_price, :buy_now_price, :current_price, :min_price, :end_date, :buyer_id)
+    params.require('product').permit(:name, :category, :description, :long_description, :starting_price, :buy_now_price, :current_price, :min_price, :end_date, :buyer_id, :avatar)
   end
 
   def load_product
