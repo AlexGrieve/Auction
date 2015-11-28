@@ -5,6 +5,11 @@
 				<br />
 				<%= f.text_area :review, :cols => "40", :rows => "10" %>
 			</label>
+			<label>
+			<br />
+			<%= f.label :rating %>
+		 	<%= f.select(:rating, [1, 2, 3, 4, 5], {:include_blank => false}) %>
+		 	</label>
 		<br />
 		<input type="hidden" name="reviewed_user_id" value="<%= @id %>" />
 		<%= f.submit %>

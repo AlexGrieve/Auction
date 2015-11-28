@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	has_secure_password
-
-	mount_uploader :avatar, AvatarUploader
+	before_save :set_rating, :set_purchases
+	#mount_uploader :avatar, AvatarUploader
 
 	# Validates the user's password create
 	validates :password, length: {minimum: 5}, presence: {on: :create}
@@ -14,4 +14,14 @@ class User < ActiveRecord::Base
 
 	has_many :purchases, :class_name => 'Product', :foreign_key => 'buyer_id'
 	has_many :sales, :class_name => 'Product', :foreign_key => 'user_id'	
+
+	def set_rating
+		self.average_rating = 0.0
+		self.total_ratings = 0
+	end
+
+	def set_purchases
+		self.products_sold = 0
+		self.products_bought = 0
+	end
 end

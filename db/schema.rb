@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151127023048) do
+ActiveRecord::Schema.define(version: 20151128201352) do
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20151127023048) do
     t.datetime "updated_at",       null: false
     t.integer  "reviewer_id"
     t.integer  "reviewed_user_id"
+    t.integer  "rating"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,8 +53,9 @@ ActiveRecord::Schema.define(version: 20151127023048) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "cash"
-    t.integer  "average_rating"
+    t.decimal  "average_rating"
     t.string   "avatar"
+    t.integer  "total_ratings"
   end
 
 end
