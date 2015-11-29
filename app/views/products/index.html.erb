@@ -13,6 +13,11 @@
 
 <br/>
 
+<%= form_tag products_path, method: "GET" do %>
+	<%= text_field_tag :q, params[:q] %>
+	<%= submit_tag "Search" %>
+<% end %>
+
 <%= render "productlist" %>
 <%= render "userlist" %>
 

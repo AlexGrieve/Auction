@@ -27,7 +27,7 @@
 <!-- List the user's reviews and average rating -->
 	<h3>Your Reviews</h3>
 	Average Seller Rating: 
-	<%if @user.average_rating.nil? %>
+	<%if @user.total_ratings.nil? or @user.total_ratings = 0 %>
 		No Seller Ratings
 	<%else%>
 		<%=@user.average_rating%> <br>
@@ -46,6 +46,8 @@
 <!-- Allow the user to sell items -->
 	<h3><%= link_to "List an item for sale", new_product_path %></h3>
 
+	<%= image_tag @user.avatar if @user.avatar.present? %>
+
 <!-- If the user is not logged into the profile that they are viewing we do this -->
 <% else %>
 
@@ -56,10 +58,12 @@
 	<h3>Number of Products bought: <%= user.products_bought %></h3>
 
 	Average Seller Rating:
-	<%if user.average_rating.nil? %>
+	<%if user.total_ratings.nil? or user.total_ratings = 0 %>
 		No Seller Ratings
 	<%else%>
-		<%=@user.average_rating%> <br>
+		<%=user.average_rating%> <br>
+		Total Ratings: 
+		<%=user.total_ratings %>
 	<%end%>
 
 <!-- Allow other user's to review this person -->
@@ -80,9 +84,11 @@
 	<% user.product.all.each do |product| %>
 		<h3><%= link_to product.name, product %></h3>
 	<% end %>
+
+	<%= image_tag user.avatar if user.avatar.present? %>
 <% end %>
 
-<%= image_tag @user.avatar if @user.avatar.present? %>
+
 
 
 <!-- Link to return to the product list -->

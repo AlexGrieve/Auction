@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
 	has_secure_password
 	before_save :set_rating, :set_purchases
-	#mount_uploader :avatar, AvatarUploader
+	mount_uploader :avatar, AvatarUploader
 
 	# Validates the user's password create
-	validates :password, length: {minimum: 5}, presence: {on: :create}
-	validates_confirmation_of :password
+	validates :password, length: {minimum: 5}, presence: {on: :create}, on: :create
+	validates_confirmation_of :password, on: :create
 
 	# Set up user's associations
 	has_many :product

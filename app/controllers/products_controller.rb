@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :load_product, only: [:edit, :show, :update, :buynow]
 
   def index
-    @product = Product.all
+    @product = Product.search_for(params[:q])
     @user = User.all
     @review = Review.all
   end
