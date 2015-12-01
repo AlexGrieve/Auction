@@ -1,10 +1,36 @@
 <!-- Check to see if the product has been sold -->
 <% if @product.product_is_sold %>
-	<h1>This item has been sold!</h1>
-	<%= @product.name %> was sold for <%= @product.current_price %>
+	<h2>This item has been sold!</h2>
+	<h2><%= @product.name %> was sold for <%=number_to_currency(@product.current_price, :unit => "$")%></h2>
 
+	<% buyer = User.find(@product.buyer_id) %>
+
+	<h2>Buyer: <%= buyer.first_name %> <%= buyer.last_name%></h2> <br />
+
+<% end %>
 <!-- Check to see if the auction ended without the product being sold -->
-<% elsif @product.auction_is_over %>
-	<h2>This auction has ended!</h2>
-	<%= @product.name %> was not sold!
+
+<% if (Time.now > @product.end_date and !@product.auction_is_over and @product.bids > 0) %>
+	<h2>Auction is over</h2>
+	<h2> Product sold for <%= number_to_currency(@product.current_price, :unit => "$") %> </h2>
+	<% buyer = User.find(@product.buyer_id) %>
+	
+	<h2>Buyer: <%= buyer.first_name %> <%= buyer.last_name%></h2> <br />
+
+	<% buyer.cash -= @product.current_price %>
+	<% buyer.save %>
+
+	<% @product.auction_is_over = true %>
+	<% @product.product_is_sold = true %>
+
+	<% if buyer.products_bought == nil %>
+		<% buyer.products_bought = 1 %>
+		<% buyer.save %>
+	<% else %>
+		<% buyer.products_bought += 1 %>
+		<% buyer.save %>
+	<% end %>
+
+<% elsif Time.now > @product.end_date and !@product.auction_is_over and @product.bids == 0%> 
+	<h2>Auction has ended, <%= @product.name %> was not sold!</h2>
 <% end %>

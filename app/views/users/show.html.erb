@@ -2,12 +2,14 @@
 <h1>Auction</h1>
 </div>
 
-<!-- Need to show the correct user's photo, currently showing the user that is logged in -->
-
-
 <!-- If the user is logged in we want to show a differnt user page than if the user was not the owner of the profile -->
-<% if "user_id" == params[:id] %>
+<% if @current_user.id.to_i == params[:id].to_i or "user_id" == params[:id] %>
+
 	<h1>Hello <%= @user.first_name %></h1>
+
+	<h3>Number of Products Sold: <%= @user.products_sold %></h3>
+	<h3>Number of Products bought: <%= @user.products_bought %></h3>
+	<h3>Cash on Hand: <%= number_to_currency(@user.cash, :unit => "$") %></h3>
 
 <!-- List the user's items that are for sale -->
 	<h3>Your Items for sale!</h3>
@@ -17,10 +19,11 @@
 	<% end %>
 
 <!-- List the items that a user is bidding on -->
-	<h3>Your You are bidding on!</h3>
+	<h3>Products you are bidding on!</h3>
 	<% Product.all.each do |product| %>
 		<% if product.buyer_id == @user.id %>
 			<%= link_to product.name, product %>
+			<br>
 		<% end %>
 	<% end %>
 
@@ -32,7 +35,7 @@
 	<%else%>
 		<%=@user.average_rating%> <br>
 		Total Ratings: 
-		<%=@user.total_ratings %>
+		<%=@user.total_ratings %> Stars
 	<%end%>
 
 	<br>
@@ -50,7 +53,6 @@
 
 <!-- If the user is not logged into the profile that they are viewing we do this -->
 <% else %>
-
 <!-- find the user, display their name and some stats-->
 	<% user = User.find(params[:id]) %>
 	<h1><%= user.first_name %> <%= user.last_name %></h1>

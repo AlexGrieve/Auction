@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	has_secure_password
-	before_save :set_rating, :set_purchases
+	#before_save :set_rating, :set_purchases
 	mount_uploader :avatar, AvatarUploader
 
 	# Validates the user's password create

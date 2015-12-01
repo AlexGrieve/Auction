@@ -1,4 +1,4 @@
-<% if session[:user_id] and (Time.now < @product.end_date) and !@product.product_is_sold %>
+<% if session[:user_id] and session[:user_id] != @current_user.id and (Time.now < @product.end_date) and !@product.product_is_sold %>
 
 	<!-- form tag not a form for -->
 	<%= form_tag bid_path(@product), :method => :get, :class => ProductsController do %>
@@ -9,8 +9,10 @@
 			<input type="hidden" name="buyer_id" value="<%= @product.id %>" />
 		</label>
 	<%= submit_tag "Bid" %> 
-	<% if flash[:notice] %>
-    	<div class="notice"><%= flash[:notice] %></div>
+	<% if flash[:low_bid] %>
+    	<font color="red"><%= flash[:low_bid] %> </font>
+ 	<% elsif flash[:bad_bid] %>
+    	<font color="red"><%= flash[:bad_bid] %> </font>
  	 <% end %>
 	<% end %>
 
@@ -18,6 +20,10 @@
 	<% if @product.bids == 0 %>
 		<p>
 		<%= link_to "Buy it Now Price: ", buy_now_path(:id => @product.id) %> <%= number_to_currency(@product.buy_now_price, :unit => "$") %>
+
+		<% if flash[:bad_funds] %>
+    		<font color="red"> <%= flash[:bad_funds] %> </font>
+ 	 	<% end %>
 		</p>
 	<% else %>
 	<!-- Determine the product's high bidder, if there is one -->
@@ -28,4 +34,7 @@
 
 <% elsif !session[:user_id] %>
 	You must be log in to bid!
+
+<% elsif session[:user_id] == @current_user.id %>
+
 <% end %>

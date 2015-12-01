@@ -7,7 +7,7 @@ Description: <%=@product.description%>
 Auction End Date: <%=@product.end_date.strftime("%m/%d/%Y")%> at <%= @product.end_date.strftime("%I:%M%p") %>
 <br />
 
-<% if Time.now < @product.end_date %>
+<% if Time.now < @product.end_date and !@product.product_is_sold %>
 	Time Left: <%= (@product.end_date.minus_with_coercion(Time.now)/3600).round %> Hours
 <% else %>
 	Time Left: Auction has Ended

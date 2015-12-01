@@ -20,33 +20,45 @@ def create
     # @user =  User.find(user)
 
     # Not saving the user, not recognizing the rating submitted
+    ##
+    ##
+    ##
     if @user.total_ratings == 0 or @user.total_ratings == nil
-      puts "Here!"
-      average = 2
+      @input_rating = params[:review]
+      @input_rating = @input_rating["rating"].to_d
+      average = @input_rating
       ratings = 1
+
+      @user.update average_rating: average, total_ratings: ratings
     else
       ratings = @user.total_ratings
       average = @user.average_rating
-      puts "Rating ="
-      puts ratings
-      puts "Average"
-      puts average
-      existing_rating = average * ratings
-      existing_rating += params[:rating]
-      @user.total_ratings += 1
+      @input_rating = params[:review]
+      @input_rating = @input_rating["rating"].to_d
+      puts "Input Rating:"
+      puts @input_rating
 
-      @user.average_rating = (existing_rating / @user.total_ratings)
+      existing_rating = average * ratings
+      existing_rating += @input_rating
+
+      ratings += 1
+
+      new_rating = (existing_rating / ratings)
+
+      # Still not updating
+      @user.update average_rating: new_rating, total_ratings: ratings
+
+      puts "Here!!!!!1"
     end
 
 
-    if @review.save
-      if @user.update total_ratings: 1, average_rating: 1.0
-      else
-        redirect_to new_review_path
-      end
+    if @review.save!
+      puts "Review has saved!"
+      #if @user.update total_ratings: 1, average_rating: 1.0
       redirect_to products_path
     else
-      redirect_to(new_review_path) 
+      "Review did not save!"
+      redirect_to products_path 
     end
   end
 

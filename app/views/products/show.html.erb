@@ -4,6 +4,10 @@
 
 <h1 style="text-align:center"><%= @product.name %></h1>
 
+<div class="photo-row">
+    <div class="photo"><%=image_tag(@product.avatar, height: "400", width: "400")%></div>
+</div>
+
 <%= render "sold" %>
 
 <p>
@@ -18,7 +22,7 @@
 
 <%= @product.long_description %>
 
-<%= image_tag @product.avatar if @product.avatar.present? %>
+
 
 <!-- Link to return to the product list -->
 <div id="footer">

@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.photo-row .photo {
+    background-color: white;
+    vertical-align: middle;
+    width: 66%
+}
+.photo-row .photo:nth-child(1) { text-align: right; }
+
+
 #header {
     background-color:#77B6EA;
     color:#172A3A;

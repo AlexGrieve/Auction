@@ -3,15 +3,12 @@
 </div>
 
 <% if session[:user_id] %>
-	<h2><%= link_to "Welcome Back!", user_path(:user_id) %> </h2>
+	<h2>Welcome Back <%= link_to @current_user.first_name, user_path(:user_id) %> </h2>
 <% else %>
-	<h3><%= link_to "Sign Up", new_user_path %></h3>
-	<h3><%= link_to "Log In", login_path %></h3>
+	<h3><%= link_to "Sign Up", new_user_path %><%= link_to "Log In", login_path %></h3>
 <% end %>
 
-<h2>Search our Products Below!<h2>
-
-<br/>
+<h3>Search our Products Below!<h3>
 
 <%= form_tag products_path, method: "GET" do %>
 	<%= text_field_tag :q, params[:q] %>
